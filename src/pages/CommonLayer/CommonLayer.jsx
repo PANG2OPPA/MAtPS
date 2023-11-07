@@ -10,7 +10,6 @@ import Post from "../Post";
 
 const ProjectLayer = styled.div`
   width: 1920px;
-  height: 3170px; /* 화면 높이만큼 */
   display: flex;
   flex-direction: column;
   align-items: center;

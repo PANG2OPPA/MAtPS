@@ -6,7 +6,6 @@ const FooterContainer = styled.div`
   display: flex;
   width: 100%;
   height: 400px;
-  position: absolute;
   bottom: 0;
   border: 2px solid red;
   background-color: #4e2619;
@@ -19,7 +18,7 @@ const FooterTextBox = styled.div`
 `;
 
 const FooterTextINFO = styled.p`
-  color: white
+  color: white;
   font-size: 2rem;
   margin-top: 1rem;
   margin-bottom: 3rem;
