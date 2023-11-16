@@ -5,6 +5,8 @@ import HeadSearchIcon from "../../images/SearchIcon.png";
 import CommunicationIcon from "../../images/ChatIcon.png";
 import MypageIcon from "../../images/UserIcon.png";
 import DetailSearchScreen from "./HeaderSearchDetail";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HeaderTab = styled.div`
   display: flex;
@@ -118,6 +120,12 @@ const ModalBackground = styled.div`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    navigate("/Home");
+  };
+
   const [searchQuery, setSearchQuery] = useState("");
   const [showDetailSearch, setShowDetailSearch] = useState(false);
   const modalRef = useRef(null);
@@ -156,7 +164,12 @@ const Header = () => {
 
   return (
     <HeaderTab>
-      <HeaderImg alt="헤더가로로고" src={HeaderMatpsLogo} />
+      <HeaderImg
+        alt="헤더가로로고"
+        src={HeaderMatpsLogo}
+        onClick={handleLogoClick}
+      />
+
       <HeaderSearchBar>
         <HeaderRectangle
           type="text"
@@ -170,7 +183,9 @@ const Header = () => {
         </HeaderSearchWrapper>
       </HeaderSearchBar>
       <HeaderHeadIcon>
-        <HeaderTalking alt="커뮤니티페이지" src={CommunicationIcon} />
+        <Link to="/BoardListLayout">
+          <HeaderTalking alt="커뮤니티페이지" src={CommunicationIcon} />
+        </Link>
         <HeaderUserInterface alt="로그인,마이페이지" src={MypageIcon} />
       </HeaderHeadIcon>
       {showDetailSearch && (

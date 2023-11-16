@@ -1,18 +1,23 @@
 import axios from "axios";
-const KH_DOMAIN = "http://localhost:8111";
+const MAtPS_DOMAIN = "http://localhost:8111";
 
 const AxiosApi = {
   // 로그인
   memberLogin: async (id, pw) => {
+    // 회원 로그인을 위한 함수
     const login = {
-      id: id,
-      pwd: pw,
+      // 로그인 정보를 담은 객체를 생성
+      id: id, // 사용자 아이디를 설정
+      pwd: pw, // 사용자 비밀번호를 설정
     };
-    return await axios.post(KH_DOMAIN + "/users/login", login);
+
+    return await axios.post(MAtPS_DOMAIN + "/users/login", login); // 로그인 API에 POST 요청
   },
+
+  
   //회원 조회
   memberGet: async (id) => {
-    return await axios.get(KH_DOMAIN + `/users/member/?id=${id}`);
+    return await axios.get(MAtPS_DOMAIN + `/users/member/?id=${id}`);
   },
 
   // 회원 가입
@@ -23,11 +28,11 @@ const AxiosApi = {
       name: name,
       mail: mail,
     };
-    return await axios.post(KH_DOMAIN + "/users/new", member);
+    return await axios.post(MAtPS_DOMAIN + "/users/new", member);
   },
   // 회원 가입 여부 확인
   memberRegCheck: async (id) => {
-    return await axios.get(KH_DOMAIN + `/users/check/?id=${id}`);
+    return await axios.get(MAtPS_DOMAIN + `/users/check/?id=${id}`);
   },
 
   // 회원 탈퇴
@@ -35,63 +40,40 @@ const AxiosApi = {
     const del = {
       id: id,
     };
-    return await axios.post(KH_DOMAIN + "/user/delete", del);
+    return await axios.post(MAtPS_DOMAIN + "/user/delete", del);
   },
   // 게시글 조회
   boardList: async () => {
-    return await axios.get(KH_DOMAIN + "/api/board");
+    return await axios.get(MAtPS_DOMAIN + "/api/board");
   },
   // 게시글 상세 조회
-  boardDetail: async (boardId) => {
-    return await axios.get(KH_DOMAIN + `/api/board/detail/${boardId}`);
+  post: async (boardId) => {
+    
+    return await axios.get(MAtPS_DOMAIN + `/api/post/${boardId}`);
   },
   // 게시글 쓰기
-  boardWrite: async (title, content, userId, img) => {
+  boardWrite: async (postTitle, userId, postText, postImg) => {
+   
     const board = {
-      title: title,
-      content: content,
+      postTitle: postTitle,
       userId: userId,
-      img: img,
+      postText: postText,
+      postImg: postImg,
     };
-    return await axios.post(KH_DOMAIN + "/api/board/new", board);
+    return await axios.post(MAtPS_DOMAIN + "/api/posting", board);
   },
-  // 게시글에 달린 댓글 조회
-  commentList: async (boardId) => {
-    return await axios.get(KH_DOMAIN + `/api/comment/list/${boardId}`);
+  boardDelete: async (boardId) => {
+    console.log(boardId);
+    return await axios.delete(MAtPS_DOMAIN + `/api/post/${boardId}`);
   },
-  // 댓글 쓰기
-  commentWrite: async (userId, boardId, content) => {
-    const comment = {
-      boardId: boardId,
-      userId: userId,
-      content: content,
+
+  updateBoard: async (postNum, postTitle, postText) => {
+    const board = {
+      postNum: postNum,
+      postTitle: postTitle,
+      postText: postText
     };
-    return await axios.post(KH_DOMAIN + `/api/comment/new`, comment);
-  },
-  // Todo 조회
-  todoList: async (userId) => {
-    return await axios.get(KH_DOMAIN + `/api/todo/list?userId=${userId}`);
-  },
-  // Todo 쓰기
-  todoInsert: async (userId, content) => {
-    const todo = {
-      userId: userId,
-      text: content,
-      checked: false,
-    };
-    return await axios.post(KH_DOMAIN + "/api/todo/new", todo);
-  },
-  // Todo 삭제
-  todoDelete: async (todoId) => {
-    return await axios.delete(KH_DOMAIN + `/api/todo/${todoId}`);
-  },
-  // Todo 수정
-  todoUpdate: async (todoId) => {
-    return await axios.put(KH_DOMAIN + `/api/todo/${todoId}`);
-  },
-  // 영화 목록 조회
-  movieList: async () => {
-    return await axios.get(KH_DOMAIN + "/api/movie/list");
-  },
+      return await axios.put(MAtPS_DOMAIN + "/api/edit", board);
+},
 };
 export default AxiosApi;
