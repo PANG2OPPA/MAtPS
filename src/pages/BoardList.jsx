@@ -13,13 +13,11 @@ import {
   PostContentTitle,
   PostContentTitle1,
   PostContentTitle2,
-  PostContentTitleInfo,
   PostContentTitle3,
   PostingBtn,
   PostBottom,
   PaginationBox,
   PostContentTitle4,
-  PostImg1,
 } from "../pages/Style/Post-BoardList";
 import Header from "./Common/Header";
 import Footer from "./Common/Footer";
